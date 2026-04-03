@@ -1,3 +1,11 @@
-from django.shortcuts import render
+from rest_framework import generics
+from rest_framework.permissions import IsAuthenticated
+from .models import Attendance
+from .serializers import AttendanceSerializer
 
-# Create your views here.
+class AttendanceListCreateView(generics.ListCreateAPIView):
+    serializer_class = AttendanceSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        return Attendance.objects.filter(employee__user=self.request.user)
