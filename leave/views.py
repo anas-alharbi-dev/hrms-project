@@ -9,7 +9,12 @@ class LeaveListCreateView(generics.ListCreateAPIView):
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
+        if self.request.user.is_staff:
+            return LeaveRequest.objects.all()
         return LeaveRequest.objects.filter(employee__user=self.request.user)
+
+    def perform_create(self, serializer):
+        serializer.save(employee=self.request.user.employee)
 
 
 class LeaveDetailView(generics.RetrieveUpdateDestroyAPIView):
@@ -17,4 +22,6 @@ class LeaveDetailView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-        return LeaveRequest.objects.filter(employee__user=self.request.user)
+        if self.request.user.is_staff:
+            return LeaveRequest.objects.all()
+        return LeaveRequest.objects.filter(employee__user=self.request.user) 
