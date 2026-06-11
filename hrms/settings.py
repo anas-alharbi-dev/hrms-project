@@ -47,6 +47,8 @@ INSTALLED_APPS = [
 'departments',
 'attendance',
 'leave',
+'dashboard',
+'reports',
 
 ]
 
