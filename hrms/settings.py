@@ -49,6 +49,8 @@ INSTALLED_APPS = [
 'leave',
 'dashboard',
 'reports',
+'django_filters',
+'drf_spectacular',
 
 ]
 
@@ -56,8 +58,19 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+    'DEFAULT_FILTER_BACKENDS': [
+        'django_filters.rest_framework.DjangoFilterBackend',
+        'rest_framework.filters.SearchFilter',
+        'rest_framework.filters.OrderingFilter',
+    ],
 }
 
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'HRMS API',
+    'DESCRIPTION': 'Human Resource Management System API with JWT, RBAC, Dashboard, Reports, Search and Filters.',
+    'VERSION': '1.0.0',
+}
 
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME' : timedelta(minutes=30),
