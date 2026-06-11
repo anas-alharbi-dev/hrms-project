@@ -273,4 +273,4 @@ Anas Alharbi
 
 Software Engineering Graduate
 
-Backend Development | APIs | System Design | Digital Transformation
+Backend Development | APIs | System Design | Digital Transformation.
